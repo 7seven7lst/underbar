@@ -196,6 +196,20 @@
   // Determine whether all of the elements match a truth test.
   _.every = function(collection, iterator) {
     // TIP: Try re-using reduce() here.
+    if ( iterator === undefined) { // if callback function is not defined,
+      // define a default function that return the boolean status of the value
+      iterator= function (num) {
+        return num === true;
+      }
+    }
+    return _.reduce(collection,function(acc, cur){
+      if (!iterator(cur)){ // if encountered a false item
+        // set the accumulator to false
+        acc=false;
+      }
+      // otherwise, if not encountered a false item, accumulator remains true
+      return acc;
+    }, true);
   };
 
   // Determine whether any of the elements pass a truth test. If no iterator is
