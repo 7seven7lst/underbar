@@ -165,10 +165,19 @@
     if (accumulator === undefined){
       accumulator = collection.shift();
     }
-    for (var i=0; i< collection.length; i++){
+    if (Array.isArray(collection)) { // if collection is array
+      for (var i=0; i< collection.length; i++){
       accumulator=iterator(accumulator,collection[i]);
+      }
     }
-    return accumulator;
+    else {
+      for (var key in collection) { // if collection is an object
+        if (collection.hasOwnProperty(key)) {
+          accumulator = iterator(accumulator, collection[key]);
+        }
+      }
+    }
+    return accumulator;  
   };
 
   // Determine if the array or object contains a given value (using `===`).
