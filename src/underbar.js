@@ -385,7 +385,6 @@
       // not efficient solution but quick solution
       result=toShuffle(result);
     }
-    console.log(result);
     return result;
   };
 
