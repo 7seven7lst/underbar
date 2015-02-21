@@ -370,7 +370,22 @@
       }
     return result;
     }
-    result=toShuffle(result);
+
+    function identicalArray(array, result){
+      var flag=true;
+      for (var i=0; i<array.length; i++){
+        if (array[i]!==result[i]){
+          return false;
+        }
+      }
+      return flag;
+    }
+    while (identicalArray(array, result)){ // as long as the result is identical to original
+      // then need to re-shuffle
+      // not efficient solution but quick solution
+      result=toShuffle(result);
+    }
+    console.log(result);
     return result;
   };
 
