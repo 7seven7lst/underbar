@@ -309,6 +309,25 @@
   // already computed the result for the given argument and return that value
   // instead if possible.
   _.memoize = function(func) {
+    var alreadyCalled = false;
+    var memArg =[];
+    var result;
+    function match(array, item){
+      var matched=false;
+      for (var i=0; i<array.length; i++){
+        if (array[i]=== item)
+          return true;
+      }
+      return false;
+    }
+    return function() {
+      if (!match(memArg, arguments)) {
+        result= func.apply(this, arguments);
+        memArg.push(arguments);
+        //console.log(memArg);
+      }  
+      return result;
+    }  
   };
 
   // Delays a function for the given number of milliseconds, and then calls
@@ -332,6 +351,27 @@
   // input array. For a tip on how to make a copy of an array, see:
   // http://mdn.io/Array.prototype.slice
   _.shuffle = function(array) {
+    var result= array.slice();
+    function toShuffle(result){
+      var counter = result.length, temp, index;
+
+     // While there are elements in the array
+      while (counter > 0) {
+          // Pick a random index
+          index = Math.floor(Math.random() * counter);
+
+          // Decrease counter by 1
+          counter--;
+
+          // And swap the last element with it
+          temp = result[counter];
+          result[counter] = result[index];
+          result[index] = temp;
+      }
+    return result;
+    }
+    result=toShuffle(result);
+    return result;
   };
 
 
