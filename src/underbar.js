@@ -321,9 +321,10 @@
       return false;
     }
     return function() {
-      if (!match(memArg, arguments)) {
+      var arg=JSON.stringify(arguments);
+      if (!match(memArg, arg)) {
         result= func.apply(this, arguments);
-        memArg.push(arguments);
+        memArg.push(arg);
         //console.log(memArg);
       }  
       return result;
